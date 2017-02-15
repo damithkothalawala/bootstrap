@@ -34,8 +34,16 @@ bash "s3_downloads" do
   wget -qO- https://github.com/opscode-cookbooks/cron/archive/v1.2.6.tar.gz | tar xvzC /var/chef/cookbooks/cron --strip-components=1 | true
   wget -qO- https://github.com/opscode-cookbooks/logrotate/archive/v1.3.0.tar.gz | tar xvzC /var/chef/cookbooks/logrotate --strip-components=1 | true
   wget -qO- https://github.com/opscode-cookbooks/chef-client/archive/v3.7.0.tar.gz | tar xvzC /var/chef/cookbooks/chef-client --strip-components=1 | true
-  /usr/bin/chef-solo -j /etc/chef/chef.json > /tmp/chef_solo.log 2>&1 
+  #/usr/bin/chef-solo -j /etc/chef/chef.json > /tmp/chef_solo.log  
   # Execute roles
-  /usr/bin/chef-client  -j /etc/chef/roles.json --once > /tmp/chef_client.log 2>&1 
+  #/usr/bin/chef-client  -j /etc/chef/roles.json --once > /tmp/chef_client.log 2>&1 
   EOH
+end
+
+execute 'initiate_registration' do
+  command '/usr/bin/chef-solo -j /etc/chef/chef.json'
+end
+
+execute 'initiate_chef_client' do
+  command '/usr/bin/chef-client  -j /etc/chef/roles.json --once'
 end
