@@ -26,10 +26,10 @@ bash "s3_downloads" do
   code <<-EOH
   # Bootstrap chef
   rm -f /etc/chef/client.pem /etc/chef/client.rb
-  aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/chef-validator.pem  . | true
-  aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/data_bag_secret  . | true
-  cp -f /tmp/chef-validator.pem /etc/chef/validation.pem | true
-  cp -f /tmp/data_bag_secret /etc/chef/encrypted_data_bag_secret | true
+  aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/chef-validator.pem  . 
+  aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/data_bag_secret .
+  cp -f /tmp/chef-validator.pem /etc/chef/validation.pem
+  cp -f /tmp/data_bag_secret /etc/chef/encrypted_data_bag_secret 
   # Bootstrap Chef Client
   mkdir -p /var/chef/cache /var/chef/cookbooks/chef-client /var/chef/cookbooks/cron /var/chef/cookbooks/logrotate 
   wget -qO- https://github.com/opscode-cookbooks/cron/archive/v1.2.6.tar.gz | tar xvzC /var/chef/cookbooks/cron --strip-components=1 
