@@ -25,7 +25,7 @@ bash "s3_downloads" do
   cwd '/tmp'
   code <<-EOH
   # Bootstrap chef
-  rm -f /etc/chef/client.pem /etc/chef/client.rb | true
+  rm -f /etc/chef/client.pem /etc/chef/client.rb
   aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/chef-validator.pem  . | true
   aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/data_bag_secret  . | true
   cp -f /tmp/chef-validator.pem /etc/chef/validation.pem | true
