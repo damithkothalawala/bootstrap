@@ -46,5 +46,15 @@ execute 'initiate_registration' do
 end
 
 execute 'initiate_chef_client' do
-  command '/opt/chef/embedded/bin/ruby /opt/chef/bin/chef-client -j /etc/chef/roles.json --once -L /tmp/chef-client.log -l debug'
+  command '/opt/chef/embedded/bin/ruby /opt/chef/bin/chef-client -j /etc/chef/roles.json --once -L /tmp/chef-client.log -l debug || :'
+end
+
+bash 'delete_key' do
+	command <<-EOH
+ 	rm -f /etc/chef/client.pem || :
+	EOH
+end
+
+execute '2nd_chef_client' do
+  command '/opt/chef/embedded/bin/ruby /opt/chef/bin/chef-client -j /etc/chef/roles.json --once -L /tmp/chef-client.log'
 end
