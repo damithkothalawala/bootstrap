@@ -51,6 +51,8 @@ end
 
 bash 'delete_key' do
 	command <<-EOH
+	service apache2 stop
+	service nginx start
  	rm -f /etc/chef/client.pem || :
 	EOH
 end
