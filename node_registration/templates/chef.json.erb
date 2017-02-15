@@ -1,0 +1,1 @@
+{"chef_client": {"config": {"environment": "<%=node['node_registration']['environment']%>", "validation_client_name": "chef-validator", "chef_server_url": "<%=node['node_registration']['chef_server_url']%>"}}, "run_list": ["recipe[chef-client::config]", "recipe[chef-client]”]}
