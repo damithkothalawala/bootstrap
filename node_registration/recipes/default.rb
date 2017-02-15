@@ -7,6 +7,11 @@
 #install aws cli
 package "awscli"
 
+bash "install_chef" do
+	code <<-EOH
+	curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 11.16.0
+	EOH
+end
 template "/etc/chef/chef.json" do
 	source "chef.json.erb"
 end
@@ -20,7 +25,6 @@ bash "s3_downloads" do
   cwd '/tmp'
   code <<-EOH
   # Bootstrap chef
-  curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 11.16.0
   aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/chef-validator.pem  .
   aws s3 cp --region "eu-west-1" s3://thilinam-base-privatekeybucket-wt1l6xcd2e1u/data_bag_secret  .
   cp -f /tmp/chef-validator.pem /etc/chef/validation.pem 
