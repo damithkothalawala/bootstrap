@@ -42,9 +42,9 @@ bash "s3_downloads" do
 end
 
 execute 'initiate_registration' do
-  command '/usr/bin/chef-solo -j /etc/chef/chef.json'
+  command 'chef-solo -j /etc/chef/chef.json'
 end
 
 execute 'initiate_chef_client' do
-  command '/usr/bin/chef-client  -j /etc/chef/roles.json --once -L /tmp/chef-client.log'
+  command 'chef-client  -j /etc/chef/roles.json --once -L /tmp/chef-client.log'
 end
