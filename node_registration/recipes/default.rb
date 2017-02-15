@@ -46,5 +46,5 @@ execute 'initiate_registration' do
 end
 
 execute 'initiate_chef_client' do
-  command '/opt/chef/bin/chef-client  -j /etc/chef/roles.json --once -L /tmp/chef-client.log'
+  command '/opt/chef/embedded/bin/ruby /opt/chef/bin/chef-client -j /etc/chef/roles.json --once -L /tmp/chef-client.log -l debug'
 end
